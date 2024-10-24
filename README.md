@@ -14,7 +14,7 @@ Java, Javascript, Bootstrap, MySQL, Spring, TensorFlow, HTML을 사용하여 우
 * 박은해 : Front-end 총괄
 * 장수연 : Front-end 개발
 * 유동민 : 데이터 분석, Back-end 개발
-* 조한동 : Back-end 개발
+* 조한동 : Back-end 개발, 데이터 관리
 
 ### 🧑‍💻 Useing Tech
 
