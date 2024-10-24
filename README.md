@@ -8,3 +8,19 @@ Java, Javascript, Bootstrap, MySQL, Spring, TensorFlow, HTML을 사용하여 우
 
 * 개발 기간 : 2024.09.02 ~ 2024.10.18
 
+### 🧑‍🤝‍🧑 개발자 소개
+
+* 정환희 : 팀장, Back-end 총괄
+* 박은해 : Front-end 총괄
+* 장수연 : Front-end 개발
+* 유동민 : 데이터 분석, Back-end 개발
+* 조한동 : Back-end 개발
+
+### 🧑‍💻 Useing Tech
+
+* 개발환경 : VSCode, IntelliJ
+* 사용도구 : Amazon Lightsail, Figma
+* 사용기술 : Java, Javascript, Bootstrap, MySQL, Spring Boot, TensorFlow, HTML
+
+### 주요기능
+
