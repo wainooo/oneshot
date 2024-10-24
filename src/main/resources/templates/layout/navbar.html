@@ -1,0 +1,67 @@
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+        <h1><a class="logo-font navbar-brand haelogo" href="/">
+            <img th:src="@{/image/haederlogo.png}" alt="로고" class="mx-1">우리술한잔</a>
+        </h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menubar"
+                aria-controls="menubar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menubar">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i></a>
+                    <span class="border-line"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">우리술 추천</a>
+                    <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2">
+                        <li><a class="nav-link dropdown-menu" th:href="@{/preference}">취향 테스트</a></li>
+                        <li><a class="nav-link dropdown-menu" th:href="@{/searchdrink}">우리술 찾기</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">우리술 STORY</a>
+                    <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2">
+                        <li><a class="nav-link dropdown-menu d-flex flex-column" th:href="@{/youtube}">우리술 TV</a></li>
+                        <li><a class="nav-link dropdown-menu d-flex flex-column" th:href="@{/question/list}">우리술 Talk</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item position-relative" th:if="${loginMember == null}">
+                    <a class="nav-link" href="/add">회원가입</a>
+                    <span class="border-line"></span>
+                </li>
+
+                <li class="nav-item position-relative" th:if="${loginMember}">
+                    <span class="nav-link fw-bold text-dark" th:text="${loginMember.loginId}"></span>
+                </li>
+
+                <li class="nav-item position-relative">
+                    <div th:if="${loginMember == null}">
+                        <a class="nav-link" href="/login">로그인</a>
+                        <span class="border-line"></span>
+                    </div>
+                    <div th:if="${loginMember}">
+                        <a class="nav-link" href="#"><i class="bi bi-person-fill"></i></a>
+                        <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2 menu1">
+                            <li>
+                                <form th:action="@{/logout}" method="post" style="display: inline;">
+                                    <button type="submit" class="nav-link dropdown-menu d-flex flex-column"><a>로그아웃</a></button>
+                                </form>
+                            </li>
+                            <li>
+                                <a class="nav-link dropdown-menu d-flex flex-column"
+                                   th:href="@{/members/{memberid}/mypage (memberid=${loginMember.id})}">마이페이지</a>
+                            </li>
+                            <li th:if="${loginMember.loginId == 'admin'}"><a class="nav-link dropdown-menu d-flex flex-column" th:href="@{/members}">회원관리</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="line"></div>
+</nav>

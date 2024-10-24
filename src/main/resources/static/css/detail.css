@@ -1,0 +1,144 @@
+.pagination .page-item.active > .page-link {
+    border-bottom: 1px solid #cbbca8;
+    color: white !important; /* 텍스트 색상: 흰색 */
+}
+
+.pagination .page-link {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid  #cbbca8;
+    color: black;
+}
+
+/* 호버 상태 */
+.pagination .page-link:hover {
+    background-color: #cbbca8 !important;
+    color: white; /* 호버 시 텍스트 색상: 흰색 */
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;
+    border-bottom: 2px solid #cbbca8 !important;
+}
+
+/* preferenceTest.html css부분 */
+body {
+    /* 공통 스타일 설정 */
+    input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 10px;
+        outline: none;
+        opacity: 0.8;
+        transition: opacity .15s ease-in-out;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: darkgray;
+        cursor: pointer;
+    }
+
+    /* 기본 설정 (모바일을 기본으로 설정) */
+    .range-sweet, .range-sour, .range-refreshing, .range-body {
+        width: 100%; /* 모바일에서 100%로 설정 */
+    }
+
+    /* 작은 화면 (모바일: 너비 576px 이하) */
+    @media (max-width: 576px) {
+        .range-sweet, .range-sour, .range-refreshing, .range-body {
+            width: 100%; /* 너비를 100%로 설정하여 모바일 화면에 맞춤 */
+        }
+        .range-value {
+            font-size: 1rem; /* 작은 화면에서는 글씨 크기 조정 */
+        }
+    }
+
+    /* 중간 화면 (md: 너비 768px 이하) */
+    @media (min-width: 576px) and (max-width: 768px) {
+        .range-sweet, .range-sour, .range-refreshing, .range-body {
+            width: 90%; /* 중간 크기 화면에서 적절한 너비로 설정 */
+        }
+    }
+
+    /* 큰 화면 (lg: 너비 992px 이하) */
+    @media (min-width: 768px) and (max-width: 992px) {
+        .range-sweet, .range-sour, .range-refreshing, .range-body {
+            width: 80%; /* 큰 화면에서도 적절한 비율로 설정 */
+        }
+    }
+
+    /* 기본적으로 더 큰 화면에서는 */
+    @media (min-width: 992px) {
+        .range-sweet, .range-sour, .range-refreshing, .range-body {
+            width: 70%; /* 기본값을 70%로 설정 */
+        }
+    }
+
+    /* 단맛: 분홍색 파스텔 */
+    .range-sweet {
+        background: #f8c6d8; /* 파스텔 핑크 */
+    }
+
+    /* 신맛: 레몬색 파스텔 */
+    .range-sour {
+        background: #f9e580 /* 파스텔 레몬 */
+    }
+
+    /* 청량감: 하늘색 파스텔 */
+    .range-refreshing {
+        background: #b3e5fc; /* 파스텔 하늘색 */
+    }
+
+    /* 바디감: 갈색 파스텔 */
+    .range-body {
+        background: #d7b899; /* 파스텔 브라운 */
+    }
+}
+.mat1{
+    width: 500px !important;
+}
+
+.matrix-container {
+    overflow: hidden;
+}
+
+#summary,
+#fitCallback {
+    max-width: 500px;
+    /*overflow-x: auto; !* 수평 스크롤바 추가 *!*/
+    /*white-space: nowrap; !* 자식 요소들이 한 줄로 나열되도록 설정 *!*/
+}
+
+@media screen and (max-width: 768px){
+    #summary,
+    #fitCallback {
+        overflow-x: auto; /* 수평 스크롤바 추가 */
+    }
+}
+
+@media (min-width: 770px){
+    #summary,
+    #fitCallback {
+
+        max-width: 600px;
+        overflow-x: auto; /* 수평 스크롤바 추가 */
+        /*white-space: nowrap; !* 자식 요소들이 한 줄로 나열되도록 설정 *!*/
+    }
+}
+
+@media (max-width: 576px){
+    .fre{
+        width: 100%!important;
+    }
+}

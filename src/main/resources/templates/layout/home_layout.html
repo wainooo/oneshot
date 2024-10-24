@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" th:href="@{/image/makgeolli.ico}">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <script th:src="@{http://code.jquery.com/jquery-3.1.1.js}"></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{https://code.jquery.com/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css}">
+    <title>우리술한잔</title>
+</head>
+<body>
+<!-- 내비게이션 바 추가 -->
+<nav th:replace="~{layout/navbar :: navbarFragment}"></nav>
+<!-- 헤더 영역 추가 -->
+<header th:replace="~{layout/home_header :: home_header}"></header>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<th:block layout:fragment="home_content"></th:block>
+<!-- 푸터 영역 추가 -->
+<footer th:replace="~{layout/footer :: footer}"></footer>
+</body>
+</html>

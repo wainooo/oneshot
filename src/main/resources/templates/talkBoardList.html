@@ -1,0 +1,98 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h3 class="fs-1">우리술 Story</h3>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/youtube}" class="text-decoration-none">우리술 TV</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/question/list}" class="text-decoration-none fw-bold">우리술 Talk</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox py-2">
+            <div class="container col-10 mt-5">
+                <div class="row">
+                    <div class="mb-5 table-responsive rounded-2">
+                        <table class="table table1 table-hover text-center">
+                            <thead>
+                            <tr>
+                                <!-- 테이블 열 너비는 CSS로 조정 -->
+                                <th style="width: 20%;  background-color: #cbbca8;border-top-left-radius: 10px;">번호</th>
+                                <th style="width: 40%; background-color: #cbbca8;">제목</th>
+                                <th style="width: 20%; background-color: #cbbca8;">글쓴이</th>
+                                <th style="width: 20%; background-color: #cbbca8; border-top-right-radius: 10px;">작성일</th>
+                            </tr>
+                            </thead>
+                            <tbody class="rounded-2">
+                            <tr th:each="question, loop : ${paging}">
+                                <td th:text="${paging.getTotalElements() - (paging.number * paging.size) - loop.index}" class="fw-normal"></td>
+                                <td class="fw-normal">
+                                    <a th:href="@{/question/detail/{id} (id=${question.id})}" th:text="${question.subject}" class="text-decoration-none fw-bold text-muted">제목</a>
+                                    <span class="text-primary small ms-2" th:if="${#lists.size(question.answerList) > 0}" th:text="'(' + ${#lists.size(question.answerList)} + ')'">댓글수</span>
+                                </td>
+                                <td th:text="${question.author != null ? question.author.loginId : 'Unknown'}" class="fw-normal"></td>
+                                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" class="fw-normal"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(paging.content)}">
+                                <td colspan="4" class="text-center">검색 결과가 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <div class="col-3">
+                            <a th:href="@{/question/create}">
+                                <button class="btn btn-outline-secondary" type="button">글쓰기</button>
+                            </a>
+                        </div>
+
+                        <form action="/question/list" method="GET" class="input-group mb-2 w-auto">
+                            <select name="searchType" class="form-select" aria-label="검색 유형">
+                                <option value="title">제목</option>
+                                <option value="content">내용</option>
+                            </select>
+                            <input type="text" name="kw" class="form-control text-center" placeholder="검색하세요" aria-label="검색어" required>
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+
+                    <div class="pagination-container text-center mb-5" th:if="${!#lists.isEmpty(paging.content)}">
+                        <div class="pagination justify-content-center">
+                            <span class="page-item first" th:class="${paging.hasPrevious()} ? '' : 'disabled'">
+                                <a class="page-link" th:href="@{/question/list(kw=${kw}, page=0)}" aria-label="First">&lt;&lt;</a>
+                            </span>
+                            <span class="page-item" th:class="${paging.hasPrevious()} ? '' : 'disabled'">
+                                <a class="page-link" th:href="@{/question/list(kw=${kw}, page=${paging.number - 1})}" aria-label="Previous">&lt;</a>
+                            </span>
+                            <span th:each="i : ${#numbers.sequence(paging.number > 2 ? paging.number - 2 : 0,                 (paging.number + 2 < paging.totalPages ? paging.number + 2 : paging.totalPages - 1))}"
+                                  class="page-item"
+                                  th:class="${paging.number == i} ? 'active' : ''">
+                                <a class="page-link" th:href="@{/question/list(kw=${kw}, page=${i})}" th:text="${i + 1}"></a>
+                            </span>
+                            <span th:if="${paging.number < paging.totalPages - 1}" class="page-item" th:class="${paging.hasNext()} ? '' : 'disabled'">
+                                <a class="page-link" th:href="@{/question/list(kw=${kw}, page=${paging.number + 1})}" aria-label="Next">&gt;</a>
+                            </span>
+                            <span class="page-item last" th:class="${paging.hasNext()} ? '' : 'disabled'">
+                                <a class="page-link" th:href="@{/question/list(kw=${kw}, page=${paging.totalPages - 1})}" aria-label="Last">&gt;&gt;</a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

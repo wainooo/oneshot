@@ -1,0 +1,197 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">My Page</h2>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/question/detail/{id} (id=${question.id})}" class="text-decoration-none fw-bold">게시글 보기</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/question/detail/{id}#commentsWrite (id=${question.id})}" class="text-decoration-none fw-bold">댓글 작성하기</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/question/detail/{id}#comments (id=${question.id})}" class="text-decoration-none fw-bold">댓글 보기</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox py-3">
+            <div class="container col-lg-8 col-md-9 col-sm-10">
+                <div class="row pt-5">
+                    <div class=" p-4 mb-5">
+                        <div class="row justify-content-center mb-3 pt-2 pb-4">
+                            <div class="rounded-5 col-2 shadow" style="width:250px;height:50px;background-color:#6c5d53;" >
+                                <h4 class="py-2 text-center text-white align-middle">게시글 보기</h4>
+                            </div>
+                        </div>
+                        <div class="pt-3 mb-3 row mx-auto">
+                            <div class="col-sm-12 col-lg-2">
+                                <label th:for="subject" class="col-form-label fw-bold">제목</label>
+                            </div>
+                            <div class="col-lg-10 col-sm-12">
+                                <input th:field="*{question.subject}" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row mx-auto">
+                            <div class="col-lg-2 col-md-2 col-sm-6">
+                                <label th:for="question.author.loginId" class="col-form-label fw-bold">작성자</label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <input th:field="*{question.author.loginId}" type="text" class="form-control" disabled>
+                            </div>
+                            <div class="col-lg-2 col-md-1"></div>
+                            <div class="col-lg-2 col-md-2 col-sm-6">
+                                <label th:for="question.createDate" class="col-form-label fw-bold">작성일</label>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <input th:value="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" type="text" class="form-control cs" disabled>
+                            </div>
+                        </div>
+                        <div class="mb-3 row mx-auto">
+                            <div class="row">
+                                <label th:for="content" class="col-sm-2 col-form-label fw-bold mb-2">내용</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea th:field="*{question.content}" class="form-control" rows="15" disabled></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row mx-auto">
+                            <div class="col-12" style="text-align: end;">
+                                <a th:href="@{/question/modify/{questionId} (questionId=${question.id})}" class="btn btn-outline-success me-2" th:if="${question.author.loginId != null and loginMember.loginId == question.author.loginId}">수정</a>
+                                <a th:if="${question.author.loginId != null and loginMember.loginId == question.author.loginId}"
+                                   class="btn btn-outline-danger me-2"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#confirmDeleteQuestionModal">삭제</a>
+
+                                <!-- 질문 삭제 모달 -->
+                                <div class="modal fade" id="confirmDeleteQuestionModal" tabindex="-1" aria-labelledby="confirmDeleteQuestionModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="confirmDeleteQuestionModalLabel">게시글 삭제 확인</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-start">
+                                                정말로 이 질문을 삭제하시겠습니까?<br>
+                                                질문을 삭제하면 관련된 모든 답변도 함께 삭제됩니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn b1" data-bs-dismiss="modal">취소</button>
+                                                <form th:action="@{/question/delete/{questionId}(questionId=${question.id})}" method="post" class="d-inline">
+                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button th:onclick="|location.href='@{/question/list}'|" class="btn btn-outline-secondary" type="button">목록</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 mb-5 my-3" id="commentsWrite">
+                        <div class="row justify-content-center mb-3 pt-2 pb-4">
+                            <div class="rounded-5 col-2 shadow" style="width:250px;height:50px;background-color:#6c5d53;" >
+                                <h4 class="py-2 text-center text-white align-middle">댓글 작성하기</h4>
+                            </div>
+                        </div>
+                        <!-- 댓글 쓰기 -->
+                        <form class="pt-3" th:action="@{/answer/create/{id} (id=${question.id})}" th:object="${answerForm}" method="post">
+                            <div class="mb-3 row mx-auto">
+                                <div class="col-sm-12">
+                                    <textarea th:field="*{content}" class="form-control" rows="3" placeholder="댓글을 입력하세요" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row mx-auto">
+                                <div style="text-align: end;">
+                                    <button class="btn btn-dark" type="submit">등록</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="p-4  my-3"  id="comments">
+                        <div class="row justify-content-center mb-3 pt-2 pb-4">
+                            <div class="rounded-5 col-2 shadow" style="width:250px;height:50px;background-color:#6c5d53;" >
+                                <h4 class="py-2 text-center text-white align-middle">댓글 보기</h4>
+                            </div>
+                        </div>
+                        <div class="mb-3 row mx-auto">
+                            <p class="mt-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></p>
+                            <hr width="100%" class="mb-2">
+                        </div>
+
+                        <div th:each="answer : ${answers}" class="my-3">
+                            <div class="mb-3 row mx-auto">
+                                <div class="col-lg-2 col-md-2 col-sm-6">
+                                    <label th:for="answer.author.loginId" class="col-form-label fw-bold">작성자</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <input th:if="${answer.author != null and answer.author.loginId != null}" th:value="${answer.author.loginId}" type="text" class="form-control" disabled>
+                                </div>
+                                <div class="col-lg-2 col-md-1"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-6">
+                                    <label th:for="answer.createDate" class="col-form-label fw-bold">작성일</label>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <input th:value="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}" type="text" class="form-control  cs" disabled>
+                                </div>
+                            </div>
+                            <div class="mb-3 row mx-auto">
+                                <div class="col-sm-12">
+                                    <textarea th:text="${answer.content}" class="form-control" rows="3" disabled></textarea>
+                                </div>
+                            </div>
+                            <!-- 댓글 수정/삭제 버튼 -->
+                            <div class="row mx-auto">
+                                <div class="col-12" style="text-align: end;">
+                                    <a th:if="${answer.author != null and answer.author.loginId != null and loginMember != null and loginMember.loginId == answer.author.loginId}" th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-outline-success me-2">수정</a>
+                                    <a th:if="${answer.author != null and answer.author.loginId != null and loginMember != null and loginMember.loginId == answer.author.loginId}"
+                                       class="btn btn-outline-danger"
+                                       data-bs-toggle="modal"
+                                       th:data-bs-target="'#confirmDeleteAnswerModal-' + ${answer.id}">삭제</a>
+
+                                    <!-- 댓글 삭제 모달 -->
+                                    <div class="modal fade" th:id="'confirmDeleteAnswerModal-' + ${answer.id}" tabindex="-1" aria-labelledby="confirmDeleteAnswerModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmDeleteAnswerModalLabel">댓글 삭제 확인</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-start">
+                                                    정말로 이 댓글을 삭제하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                    <form th:action="@{/answer/delete/{answerId} (answerId=${answer.id})}" method="post" class="d-inline">
+                                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                        <button type="submit" class="btn btn-danger">삭제</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

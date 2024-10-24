@@ -1,0 +1,162 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">우리술 추천</h2>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/preference}" class="text-decoration-none fw-bold">취향 테스트</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/searchdrink}" class="text-decoration-none">우리술 찾기</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="mt-5 text-center">우리술 주종 취향 테스트하기</h1>
+            <hr class="mb-5">
+            <div class="container text-center my-5 border p-4 w-50 fre">
+                <div class="fs-4 fw-bold mb-3" style="color: #3b2006;">※ 예측순서 ※</div>
+                <div class="fs-5">1. 페이지 맨 아래에 모델 버튼을 클릭하여 학습시키기</div>
+                <div class="fs-5">2. 모델 학습 완료</div>
+                <div class="fs-5">3. 각 맛의 정도 선택 후 예측하기</div>
+                <div class="fs-5">4. 선택한 주종 보러가기</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center"> <!-- 가운데 정렬을 위한 text-center 추가 -->
+                    <h4 style="color: #3b2006;" class="mb-3">선호하는 우리술 입맛을 골라주세요.</h4>
+                    <form method="post" th:action="@{/preference}">
+
+                        <div class="mt-2 row g-3 mb-3 align-items-center justify-content-center"> <!-- 가운데 정렬을 위한 justify-content-center 추가 -->
+                            <div class="col-6 col-md-4 text-end"> <!-- 레이블을 오른쪽으로 정렬 -->
+                                <label th:for="sweetTaste" class="col-form-label">단맛(맛의 정도 선택)</label>
+                            </div>
+                            <div class="col-6">
+                                <input th:field="*{preferenceForm.sweetTaste}" th:value="0" step="1" type="range" disabled min="0" max="5" oninput="updateValue(this, 'range-value-1'); checkRangeInputs();" style="width: 70%;" class="range-sweet"> <!-- th:value="5" -> 기본값을 5로 설정 , step="1" -> 슬라이더 값을 1로 설정, type="range" -> 슬라이더 형태의 입력을 의미하며, 사용자가 마우스를 끌어서 값을 선택할수 있습니다. 자바스크립트 함수를 호출하여 슬라이더 값을 실시간으로 화면에 표시합니다.-->
+                                <span class="range-value fw-bold fs-5 ms-3" id="range-value-1">0</span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3 align-items-center justify-content-center">
+                            <div class="col-6 col-md-4 text-end">
+                                <label th:for="sourTaste" class="col-form-label">신맛(맛의 정도 선택)</label>
+                            </div>
+                            <div class="col-6">
+                                <input th:field="*{preferenceForm.sourTaste}" th:value="0" step="1" type="range" disabled min="0" max="5" oninput="updateValue(this, 'range-value-2'); checkRangeInputs();" style="width: 70%;" class="range-sour">
+                                <span class="range-value fw-bold fs-5 ms-3" id="range-value-2">0</span> <!-- 값 표시 -->
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3 align-items-center justify-content-center">
+                            <div class="col-6 col-md-4 text-end">
+                                <label th:for="refreshing" class="col-form-label">청량감(맛의 정도 선택)</label>
+                            </div>
+                            <div class="col-6">
+                                <input th:field="*{preferenceForm.refreshing}" th:value="0" step="1" type="range" disabled min="0" max="5" oninput="updateValue(this, 'range-value-3'); checkRangeInputs();" style="width: 70%;" class="range-refreshing">
+                                <span class="range-value fw-bold fs-5 ms-3" id="range-value-3">0</span> <!-- 값 표시 -->
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 mb-3 align-items-center justify-content-center">
+                            <div class="col-6 col-md-4 text-end">
+                                <label th:for="bodyFeeling" class="col-form-label">바디감(맛의 정도 선택)</label>
+                            </div>
+                            <div class="col-6">
+                                <input th:field="*{preferenceForm.bodyFeeling}" th:value="0" step="1" type="range" disabled min="0" max="5" oninput="updateValue(this, 'range-value-4'); checkRangeInputs();" style="width: 70%;" class="range-body">
+                                <span class="range-value fw-bold fs-5 ms-3" id="range-value-4">0</span> <!-- 값 표시 -->
+                            </div>
+                        </div>
+
+                        <!-- Predict button과 output -->
+                        <div class="my-5 align-items-center d-lg-flex justify-content-center"> <!-- Predict 버튼을 가운데 정렬 -->
+                            <!-- Predict 버튼을 가운데 정렬 -->
+                            <div>
+                                <button type="button" class="btn btn-lg mx-5 mb-3" id="predict-button" disabled
+                                        onclick="predict()" style="width: 200px; background-color: #ddd6ce; border: none;">
+                                    예측하기
+                                </button>
+                            </div>
+
+                            <!-- 예측 결과 텍스트 -->
+                            <div>
+                                <div id="predict-output" class="fw-bold mb-3 align-items-center"></div>
+                                <input th:field="*{preferenceForm.predictedLiquor}" type="hidden" id="predictedLiquor" name="predictedLiquor"/>
+                            </div>
+
+                            <!-- 제출 버튼을 가운데 정렬 -->
+                            <div>
+                                <button type="submit" class="btn btn-lg mx-5 mb-3" id="submit-button" style="width: 250px; background-color: #cabfae; border: none;">선택한 주종 보러가기</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr class="my-3">
+
+                <p class="my-3 text-center fw-bold fs-3">맛별 주종 그래프</p>
+                <p class="fs-5 text-start mb-5">※ 테스트 주종에는 ‘과실주’, ‘약주/청주’, ‘탁주’가 들어있습니다.</p>
+                <!-- <button class="mb-3 btn btn-success" onclick="run()">데이터 시각화 하기</button> -->
+
+                <!-- 히트맵 시각화 결과를 출력할 영역 -->
+                <div class="row mb-5 d-flex justify-content-center" id="heatmap-container">
+
+                    <div class="col-lg-6 col-md-12 my-3 d-flex justify-content-center">
+                        <h3 class="text-center" id="heatmapPlot1_title"></h3>
+                        <div id="heatmapPlot1" style="width: 80%;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 my-3 d-flex justify-content-center">
+                        <h3 class="text-center" id="heatmapPlot2_title"></h3>
+                        <div id="heatmapPlot2" style="width: 80%; max-width: 425px;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 my-3 d-flex justify-content-center">
+                        <h3 class="text-center" id="heatmapPlot3_title"></h3>
+                        <div id="heatmapPlot3" style="width: 80%; max-width: 425px;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 my-3 d-flex justify-content-center">
+                        <h3 class="text-center" id="heatmapPlot4_title"></h3>
+                        <div id="heatmapPlot4" style="width: 80%; max-width: 425px;"></div>
+                    </div>
+                </div>
+
+                <div id="hr"></div>
+
+                <div class="container row d-flex justify-content-center text-center"> <!-- 가운데 정렬을 위한 추가 -->
+                    <div class="col-sm-12"> <!-- 화면 크기에 따라 적절한 너비 지정 -->
+                        <div id="model-status" class="my-2">모델 훈련 전 입니다.</div>
+                        <div id="testing-status"></div>
+                        <button id="train-button" disabled onclick="train()" class="btn btn-outline-secondary btn-lg my-2">모델 훈련하기</button>
+                    </div>
+
+                    <!-- Confusion Matrix -->
+                    <div class="matrix-container col-lg-6 col-md-8 col-sm-12 row d-flex mb-3 justify-content-center text-center">
+                        <div class="mb-5"></div>
+                        <div id="matrixTitle" class="text-center fs-5 fw-bold"></div>
+                        <div id="matrix" class="text-center my-5 col-sm-12 mat1"></div>
+                        <div id="classAccuracy" class="text-center my-3"></div>
+                    </div>
+                </div>
+
+                <div class="matrix-container">
+                    <!-- 그래프 요약 -->
+                    <div class="row d-flex justify-content-center my-2">
+                        <div class="col-lg-6 col-md-8 col-sm-12 text-center">
+                            <div id="summary" class="mb-3 text-center"></div>
+                        </div>
+                    </div>
+
+                    <!-- Batch & Epoch 그래프 -->
+                    <div class="row d-flex justify-content-center mb-5">
+                        <div class="col-lg-6 col-md-8 col-sm-12">
+                            <div id="fitCallback" class="text-center"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+</section>
+</html>

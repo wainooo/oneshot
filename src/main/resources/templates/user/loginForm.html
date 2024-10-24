@@ -1,0 +1,56 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">로그인</h2>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/login}" class="text-decoration-none fw-bold">로그인</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/add}" class="text-decoration-none">회원가입</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox p-3">
+            <form th:object="${loginForm}" method="POST">
+                <div class="container log">
+                    <h3 class="text-center loginlogo"><img th:src="@{/image/haederlogo.png}" alt="로고" class="mx-1">우리술한잔</h3>
+                    <p class="lo2">회원 로그인을 하시면 혜택 및 정보를 제공 받으실 수 있습니다.</p>
+                    <div class="login_form">
+                        <input th:field="*{loginId}" type="text" id="loginId" name="loginId"
+                               th:classappend="${#fields.hasErrors('loginId')} ? 'is-invalid' : ''" placeholder="아이디"/>
+
+
+                        <input th:field="*{password}" type="password" id="password" name="password"
+                               th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''" placeholder="비밀번호"/>
+
+                        <div class="text-center">
+                            <div class="text-danger er2" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></div>
+                            <div class="text-danger er3" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                            <div th:if="${#fields.hasGlobalErrors()}">
+                                <p class="text-danger er" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="d-flex justify-content-evenly">
+                                <button class="b1 rounded-2 fw-bold" type="submit" name="login" id="login" value="로그인">로그인</button>
+                                <button th:onclick="|location.href='@{/add}'|" class="b2 rounded-2 fw-bold" type="button" value="회원가입">회원가입</button>
+                                <button th:onclick="|location.href='@{/}'|" class="b3 rounded-2 fw-bold" type="button" value="취소">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

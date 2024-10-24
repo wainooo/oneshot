@@ -1,0 +1,27 @@
+<footer th:fragment="footer" class="text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a th:href="@{/}" class="logo-font link-light text-decoration-none fs-4"><img th:src="@{/image/footerlogo.png}" alt="로고" class="my-3"></a>
+            </div>
+            <div class="col-md-4 my-4">
+                <ul class="list-unstyled">
+                    <li class="fo1"><a th:href="@{/preference}" class="link-light text-decoration-none mx-2">취향테스트 </a></li>
+                    <li class="fo1"><a th:href="@{/searchdrink}" class="link-light text-decoration-none mx-2">우리술찾기 </a></li>
+                    <li class="fo1"><a th:href="@{/question/list}" class="link-light text-decoration-none mx-2">우리술Talk </a></li>
+                    <li class="fo1"><a th:href="@{/youtube}" class="link-light text-decoration-none mx-2">우리술TV </a></li>
+                </ul>
+                <p>이젠 한잔 &nbsp;&nbsp; 정환희 유동민 조한동 장수연 박은해</p>
+                <p>경기 성남시 중원구 3219 &nbsp;&nbsp; 031-751-3688<br/>
+                    개인정보처리방지 | <i class="bi bi-c-circle"></i> 2024 이젠한잔 Team. ALL rights reserved</p>
+            </div>
+            <div class="col-md-4 my-4">
+                <div class="d-flex justify-content-evenly">
+                    <a th:href="@{https://www.youtube.com/@it4230}" class="fs-5 text-white icon-hover"><i class="bi bi-youtube"></i></a>
+                    <a th:href="@{https://mr.ezenac.co.kr/}" class="fs-5 text-white icon-hover"><i class="bi bi-house-door-fill"></i></a>
+                    <a th:href="@{https://www.instagram.com/ezen_mr_official}" class="fs-5 text-white icon-hover"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

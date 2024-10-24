@@ -1,0 +1,236 @@
+<html lang="ko" layout:decorate="~{layout/home_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="home_content">
+    <main>
+        <!-- 1 -->
+        <section class="sh section1 container">
+            <div>
+                <h3 class="mb-3 co1">이젠한잔<i class="mx-2 bi bi-chat-square-quote-fill"></i></h3>
+                <p class="text-muted co5">‘우리술 한잔’은 전통주에 대한 깊이 있는 이해와<br/> 개인 맞춤형 추천을 제공하는 홈페이지입니다.</p>
+                <p class="text-muted co5">한잔의 술로 만나는 우리술의 맛과 깊이.<br/>전통주와 관련된 흥미로운 이야기와 정보를 다양한 미디어를 통해<br/> 제공해 드리며, 맞춤형 추천 시스템이 당신만의 우리술을 찾아드립니다.</p>
+                <p class="text-muted co5">‘우리술 한잔’에서 당신의 취향에 맞는<br/> ‘우리술 추천’과 ‘우리술 Story’들이 기다리고 있습니다!</p>
+                <p class="co6 text-muted px-3">‘우리술 한잔’은 전통주에 대한 깊이 있는 이해와 개인 맞춤형 추천을 제공하는 홈페이지입니다.</p>
+                <p class="co6 text-muted px-3">다양한 미디어를 통해 전통주에 관한 흥미로운 이야기와 정보를 전하며,맞춤형 추천 시스템으로 당신만의 우리술을 찾아드립니다.</p>
+            </div>
+        </section>
+        <!-- 1 -->
+
+
+        <!--2  -->
+        <section id="se2" class="sh d-flex justify-content-center align-items-center">
+            <div class="se2box"></div>
+            <div class="container">
+                <div class="row my-3 d-flex justify-content-evenly">
+                    <div class="bo col-m-6 col-md-6 col-lg-6 se11 animate"></div>
+                    <div class="col-m-6 col-md-6 col-lg-6 animate text-center py-3">
+                        <div class="mt-5">
+                            <h3>전통주란?</h3>
+                            <p class="mt-3 fw-light se2font">전통주란 무엇인가. 전통주의 사전적 의미는 한국에서 전통적으로 내려오는 제조 방법에 따라 만드는 술이다.</p>
+                            <p class="fw-light se2font">그 범위가 넓기 때문에 중요무형문화재, 시도무형문화재, 주류부문 식품명인이 만든 술, 지역특산주를 일컬어 모두 전통주라고 말한다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-3 d-flex justify-content-evenly">
+                    <div class="bo col-m-6 col-md-6 col-lg-6 se12 animate order-lg-2 order-sm-1 mb-4"></div>
+                    <div class="col-m-6 col-md-6 col-lg-6 animate text-center order-lg-1 order-sm-2 py-3">
+                        <div class="mt-3">
+                            <h3>전통주의 가장 큰 매력은?</h3>
+                            <p class="mt-3 fw-light se2font">전통주의 매력은 무궁무진하다. 가장 큰 장점으로는 맛의 무한 확장성을 들 수 있다. 전통주는 주종, 제법, 주재료, 부재료, 발효, 숙성 방식 등에 따른 맛의 스펙트럼이 넓다.</p>
+                            <p class="fw-light se2font">이런 기본 분류를 차치하고 전국 각지에 생산되는 다양한 곡류, 과실, 약재, 허브, 꽃등이 술에 적용되고있다. 여기에 다양한 컨셉이 더해지니 맛의 확장성과 매력도가 증폭된다.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--2  -->
+
+        <!--3-->
+        <section class="sh d-flex justify-content-center align-items-center se3bg">
+            <div class="container">
+                <h3 class="text-center my-5 se3title">우리술 종류<span class="animated-icon mx-2"><i class="bi bi-postcard-heart"></i></span></h3>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 aa">
+                        <a th:href="@{/searchdrink(currentFilter='과실주')}" id="img1" class="text-decoration-none se2img">
+                            <span class="overlay-text">과실주</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 aa">
+                        <a th:href="@{/searchdrink(currentFilter='약주/청주')}" id="img2" class="text-decoration-none se2img">
+                            <span class="overlay-text">약주/청주</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 aa">
+                        <a th:href="@{/searchdrink(currentFilter='탁주')}" id="img3" class="text-decoration-none se2img">
+                            <span class="overlay-text">탁주</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 bb">
+                        <a th:href="@{/searchdrink(currentFilter='증류주')}" id="img4" class="text-decoration-none se2img">
+                            <span class="overlay-text">증류주</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 bb">
+                        <a th:href="@{/searchdrink(currentFilter='기타주류')}" id="img5" class="text-decoration-none se2img">
+                            <span class="overlay-text">기타주류</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 bb">
+                        <a th:href="@{/searchdrink}" id="img6" class="text-decoration-none se2img">
+                            <span class="overlay-text">전체보기<i class="bi bi-chevron-double-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--3 끝-->
+
+        <!--4 시작-->
+        <section class="sh">
+            <div class="container text-center pt-5">
+                <h2 class="my-5">우리술 Story<span class="animated-icon"><i class="bi bi-file-earmark-play mx-2"></i></span></h2>
+                <div class="row d-flex mt-3">
+                    <div class="col-lg-6 order-lg-2 order-sm-1 mb-4">
+                        <div style="height: 300px;">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/LAbN5k5nGEc?si=IIgkb_ktO0dojl8Z" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1 order-sm-2 mb-4">
+                        <div class="mb-3 pt-5">
+                            <h4 class="mb-3 fw-semibold">‘우리술 TV’</h4>
+                            <p class="fw-light se3font mb-5">전통주와 관련된 Youtube 영상을 통해 다양한 정보와 재미를 제공합니다. <br/>전통주에 대한 지식도 쌓고, 전통주에 대한 새로운 시각을 만나보세요!</p>
+                            <a th:href="@{/youtube}" class="text-center text-black mb-2 p-2 rounded-pill se3co">TV보러가기 <span class="animated-icon1"><i class="bi bi-chevron-double-right mx-2"></i></span></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="height: 300px;">
+                            <img width="100%" height="100%" th:src="@{/image/se3img2.jpg}" alt="우리술토크">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div>
+                            <div class="mb-3 pt-5">
+                                <h4 class="mb-3 fw-semibold">‘우리술 Talk’</h4>
+                                <p class="fw-light se3font mb-5">전통주에 대한 이야기와 경험을 나누는 커뮤니티 공간입니다.<br/> 여러분의 생각과 추천을 공유하고, 다른 사용자들과 소통해보세요!</p>
+                                <a th:href="@{/question/list}" class="text-center text-decoration-none text-black mb-2 p-2 rounded-pill se3co">공유하러가기 <span class="animated-icon1"><i class="bi bi-chevron-double-right mx-2"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--4 끝-->
+
+        <!--5 시작-->
+        <section class="sh d-flex justify-content-center align-items-center se5bg">
+            <div class="container text-center">
+                <h2 class="my-5">우리술 Recommendation <span class="animated-icon"><i class="bi bi-cup-straw"></i></span></h2>
+                <div class="row flex-column flex-sm-row">
+                    <div class="col-lg-6 col-sm-12 col-md-12 mb-3">
+                        <a th:href="@{/preference}">
+                            <img th:src="@{/image/se4img1.png}" alt="취향테스트" class="se4">
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-md-12 mb-3">
+                        <a th:href="@{/searchdrink}">
+                            <img th:src="@{/image/se4img2.png}" alt="우리술찾기" class="se4">
+                        </a>
+                    </div>
+                    <p class="mt-2 fw-light">‘취향 테스트’를 통해 과실주, 약주/청주, 탁주 주종의 전통주 중에서 여러분의 취향을 찾을 수 있습니다. <br>선호하는 우리술 입맛을 체크함으로써, 나만의 전통주를 발견해보세요!</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6 -->
+        <section class="container pt-1 pb-5 mb-5">
+            <h2 class="text-center se6"><span class="animated-icon"><i class="mx-2 bi bi-balloon-heart-fill"></i></span>‘이젠_한잔’ Team : 팀원 소개<span class="animated-icon"><i class="mx-2 bi bi-balloon-heart-fill"></i></span></h2>
+            <div class="se6_cover Regular shadow rounded-3">
+                <div class="title">
+                    <div class="py-3">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-2 col-md-12 col-sm-12 mb-3 text-center">
+                                <img th:src="@{/image/cat1.png}" alt="고양이1" style="width: 80px; height: 80px;">
+                            </div>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <h3 class="fs-1 fw-bold tp1">환희- Back-End 총괄(조장)</h3>
+                                <p class="text-muted tp2">로그인, 회원가입, 마이페이지, 관리자 페이지,  우리술TALK 관리</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fs-3 tp3 px-5">백엔드 개발을 맡고 있으며, 로그인, 회원가입, 마이페이지, 관리자 페이지 및 우리술TALK 기능을 관리합니다. 프로젝트의 전체 방향성을 이끌며, 팀 내 커뮤니케이션을 원활하게 유지하는 역할을 수행합니다.</p>
+                </div>
+            </div>
+            <div class="se6_cover Regular shadow rounded-3">
+                <div class="title">
+                    <div class="py-3">
+                        <div class="text-end row d-flex">
+                            <div class="col-lg-2 col-md-12 col-sm-12 order-lg-2 order-sm-1 text-center mb-3">
+                                <img th:src="@{/image/cat2.png}" alt="고양이2" style="width: 80px; height: 80px;">
+                            </div>
+                            <div class="col-lg-10 col-md-12 col-sm-12 order-lg-1 order-sm-2">
+                                <h3 class="fs-1 fw-bold tp1">은해- Front-End 총괄</h3>
+                                <p class="text-muted tp2">전반적인 디자인 및 홈, 로그인, 회원가입, 회원목록</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fs-3 text-end tp3 px-5">전체적인 디자인과 프론트엔드를 총괄하며, 홈, 로그인, 회원가입, 회원목록 페이지를 디자인합니다. 사용자경험을 최우선으로 고려하여 플랫폼의 시각적 매력을 높이는 데 힘쓰고 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="se6_cover Regular shadow rounded-3">
+                <div class="title">
+                    <div class="py-3">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-12 col-sm-12 text-center mb-3">
+                                <img th:src="@{/image/cat3.png}" alt="고양이3" style="width: 80px; height: 80px;">
+                            </div>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <h3 class="fs-1 fw-bold tp1">수연 - Front-End 개발</h3>
+                                <p class="text-muted tp2">우리술TV, 우리술TALK, 마이페이지 담당</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fs-3 tp3 px-5">우리술TV, 우리술TALK, 마이페이지의 프론트엔드를 담당합니다. 직관적이고 반응성 좋은 인터페이스를 구현하여 사용자들이 전통주에 대해 더 쉽게 접근할 수 있도록 합니다.
+                    </p>
+                </div>
+            </div>
+            <div class="se6_cover Regular shadow rounded-3">
+                <div class="title">
+                    <div class="py-3">
+                        <div class="text-end row d-flex">
+                            <div class="col-lg-2 col-md-12 col-sm-12 order-lg-2 order-sm-1 text-center mb-3">
+                                <img th:src="@{/image/cat4.png}" alt="고양이4" style="width: 80px; height: 80px;">
+                            </div>
+                            <div class="col-lg-10 col-md-12 col-sm-12 order-lg-1 order-sm-2">
+                                <h3 class="fs-1 fw-bold tp1">동민 - Data 분석 </h3>
+                                <p class="text-muted tp2">우리술 취향 테스트 데이터 학습 및 분석 담당</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fs-3 text-end tp3 px-5">우리술 취향 테스트의 데이터 학습 및 분석을 담당합니다. 사용자 취향을 정확히 반영하는 추천 시스템을 구축하기 위해 머신러닝 알고리즘을 적용하고 있습니다.
+                    </p>
+                </div>
+            </div>
+            <div class="se6_cover Regular shadow rounded-3">
+                <div class="title">
+                    <div class="py-3">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-12 col-sm-12 text-center mb-3">
+                                <img th:src="@{/image/cat5.png}" alt="고양이5" style="width: 80px; height: 80px;">
+                            </div>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <h3 class="fs-1 fw-bold tp1">한동 - Data 관리</h3>
+                                <p class="text-muted tp2">우리술 찾기 기능 데이터 관리 담당</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fs-3 tp3 px-5">우리술 찾기의 데이터 관리 담당으로, 사용자 맞춤형 추천을 위한 데이터 수집 및 유지 관리에 힘쓰고 있습니다. 데이터의 정확성과 신뢰성을 보장하기 위해 철저한 검토 과정을 거칩니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+</html>

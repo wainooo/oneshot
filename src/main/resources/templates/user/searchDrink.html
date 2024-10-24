@@ -1,0 +1,150 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">우리술 추천</h2>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/preference}" class="text-decoration-none">취향 테스트</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/searchdrink}" class="text-decoration-none fw-bold">우리술 찾기</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox py-3">
+            <div class="container pt-5">
+                <div class="d-flex pb-3 fs-5 fw-normal justify-content-center mb-5" th:if="${param.fromPreferenceTest}" style="color: #3b2006;">
+                    "<span class="nav-link fw-bold text-dark fs-5" th:text="${loginMember.loginId}"></span>님께서 선택한 취향입니다."
+                </div>
+
+
+                <div class="row mb-5 text-center" th:if="${param.fromPreferenceTest}">
+                    <div class="col-sm-12 text-center">
+                        <div class="mb-3 fw-bold">맛 선택</div>
+                    </div>
+                    <div class="row text-center d-flex align-items-center justify-content-center">
+                        <div class="col-sm-3 p-1 ms-2 rounded-pill range-sweet w-25 fw-bold">단맛 : <span th:text="${sweetTaste}"></span></div>
+                        <div class="col-sm-3 p-1 ms-3 rounded-pill range-sour w-25 fw-bold">신맛 : <span th:text="${sourTaste}"></span></div>
+                    </div>
+                </div>
+
+                <div class="row mb-5 text-center" th:if="${param.fromPreferenceTest}">
+                    <div class="col-sm-12 text-center">
+                        <div class="mb-3 fw-bold">기타</div>
+                    </div>
+                    <div class="row text-center d-flex align-items-center justify-content-center">
+                        <div class="col-sm-3 p-1 ms-2 rounded-pill range-refreshing w-25 fw-bold">청량감 : <span th:text="${refreshing}"></span></div>
+                        <div class="col-sm-3 p-1 ms-3 rounded-pill range-body w-25  fw-bold">바디감 : <span th:text="${bodyFeeling}"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-center row mb-5">
+                    <form class="mb-4" action="#" th:action="@{/searchdrink}" method="get">
+
+                        <input type="hidden" name="currentFilter" th:value="${currentFilter}"/>
+                        <div class="d-flex row justify-content-center">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="mb-3 fw-bold">선택 주종</p>
+                            </div>
+                            <!-- 각각의 필터링 항목을 클릭하면 선택된 값을 GET 파라미터로 전송 -->
+                            <div class="col-lg-4 col-sm-6 p-2 text-sm-end text-lg-center">
+                                <button type="submit" name="filter" value="탁주" style="background-color: #8B7C67;" th:class="${currentFilter == '탁주'} ? 'btn rounded-pill text-white responsive-button w-50' : 'btn rounded-pill bg-secondary-subtle responsive-button w-50'">탁주</button>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 p-2 text-sm-start text-lg-center">
+                                <button type="submit" name="filter" value="증류주" style="background-color: #8B7C67;" th:class="${currentFilter == '증류주'} ? 'btn rounded-pill text-white responsive-button w-50' : 'btn rounded-pill bg-secondary-subtle responsive-button w-50'">증류주</button>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 p-2 text-sm-end text-lg-center">
+                                <button type="submit" name="filter" value="약주/청주" style="background-color: #8B7C67;" th:class="${currentFilter == '약주/청주'} ? 'btn rounded-pill text-white responsive-button w-50' : 'btn rounded-pill bg-secondary-subtle responsive-button w-50'">약주/청주</button>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 p-2 text-sm-start text-lg-center">
+                                <button type="submit" name="filter" value="과실주" style="background-color: #8B7C67;" th:class="${currentFilter == '과실주'} ? 'btn rounded-pill text-white responsive-button w-50'  : 'btn rounded-pill bg-secondary-subtle responsive-button w-50'">과실주</button>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 p-2 text-sm-center text-lg-center">
+                                <button type="submit" name="filter" value="기타주류" style="background-color: #8B7C67;" th:class="${currentFilter == '기타주류'} ? 'btn rounded-pill text-white responsive-button w-50' : 'btn rounded-pill bg-secondary-subtle responsive-button w-50'" >기타주류</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <p th:if="${currentFilter != ''}">총 <span th:text="${filteredDataCount}"></span>개의 결과가 나왔습니다</p>
+                    <p th:if="${currentFilter == ''}">총 <span th:text="${totalDataCount}"></span>개의 결과가 나왔습니다</p>
+                </div>
+                <div class="table-responsive rounded-2 mb-5">
+                    <table class="table table-hover text-center table-light">
+                        <thead>
+                        <tr>
+                            <th style="background-color: #cbbca8;">제품명</th>
+                            <th style="background-color: #cbbca8;">제조사</th>
+                            <th style="background-color: #cbbca8;">가격(원)</th>
+                            <th style="background-color: #cbbca8;">도수(%)</th>
+                            <th style="background-color: #cbbca8;">주종</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr class="text-center" th:each="row : ${csvData}">
+                            <td th:text="${row[1]}"></td>
+                            <td th:text="${row[12]}"></td>
+                            <td th:text="${row[11]}"></td>
+                            <td th:text="${row[6]}"></td>
+                            <td th:text="${row[8]}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 페이지네이션 -->
+                <div class="pagination-container text-center mb-5" th:if="${totalPages > 1}">
+                    <div class="pagination justify-content-center">
+                        <span class="page-item first" th:class="${currentPage == 0} ? 'disabled'">
+                            <a class="page-link"  th:if="${param.fromPreferenceTest}"
+                               th:href="@{/searchdrink(page=0, currentFilter=${currentFilter}, fromPreferenceTest=${param.fromPreferenceTest}, sweetTaste=${sweetTaste}, sourTaste=${sourTaste}, refreshing=${refreshing}, bodyFeeling=${bodyFeeling})}" aria-label="First">&lt;&lt;</a>
+                            <a class="page-link"  th:if="${param.fromPreferenceTest == null}"
+                               th:href="@{/searchdrink(page=0, currentFilter=${currentFilter})}" aria-label="First">&lt;&lt;</a>
+
+                        </span>
+                        <span class="page-item" th:class="${currentPage == 0} ? 'disabled'">
+                            <a class="page-link" th:if="${param.fromPreferenceTest}"
+                               th:href="@{/searchdrink(page=${currentPage - 1}, currentFilter=${currentFilter}, fromPreferenceTest=${param.fromPreferenceTest}, sweetTaste=${sweetTaste}, sourTaste=${sourTaste}, refreshing=${refreshing}, bodyFeeling=${bodyFeeling})}" aria-label="Previous">&lt;</a>
+                            <a class="page-link" th:if="${param.fromPreferenceTest == null}"
+                               th:href="@{/searchdrink(page=${currentPage - 1}, currentFilter=${currentFilter})}" aria-label="Previous">&lt;</a>
+                        </span>
+
+                        <span th:each="i : ${#numbers.sequence(startPage, endPage)}" class="page-item" th:class="${currentPage == i} ? 'active' : ''">
+                            <a class="page-link" th:if="${param.fromPreferenceTest}"
+                               th:href="@{/searchdrink(page=${i}, currentFilter=${currentFilter}, fromPreferenceTest=${param.fromPreferenceTest}, sweetTaste=${sweetTaste}, sourTaste=${sourTaste}, refreshing=${refreshing}, bodyFeeling=${bodyFeeling})}"
+                               th:text="${i + 1}"></a>
+                            <a class="page-link" th:if="${param.fromPreferenceTest == null}"
+                               th:href="@{/searchdrink(page=${i}, currentFilter=${currentFilter})}"
+                               th:text="${i + 1}"></a>
+                        </span>
+
+
+                        <span class="page-item" th:class="${currentPage == totalPages - 1} ? 'disabled'">
+                            <a class="page-link" th:if="${param.fromPreferenceTest}"
+                               th:href="@{/searchdrink(page=${currentPage + 1}, currentFilter=${currentFilter}, fromPreferenceTest=${param.fromPreferenceTest}, sweetTaste=${sweetTaste}, sourTaste=${sourTaste}, refreshing=${refreshing}, bodyFeeling=${bodyFeeling})}" aria-label="Next">&gt;</a>
+                            <a class="page-link"  th:if="${param.fromPreferenceTest == null}"
+                               th:href="@{/searchdrink(page=${currentPage + 1}, currentFilter=${currentFilter})}" aria-label="Next">&gt;</a>
+                        </span>
+                        <span class="page-item last" th:class="${currentPage == totalPages - 1} ? 'disabled'">
+                            <a class="page-link" th:if="${param.fromPreferenceTest}"
+                               th:href="@{/searchdrink(page=${totalPages - 1}, currentFilter=${currentFilter}, fromPreferenceTest=${param.fromPreferenceTest}, sweetTaste=${sweetTaste}, sourTaste=${sourTaste}, refreshing=${refreshing}, bodyFeeling=${bodyFeeling})}" aria-label="Last">&gt;&gt;</a>
+                            <a class="page-link" th:if="${param.fromPreferenceTest == null}"
+                               th:href="@{/searchdrink(page=${totalPages - 1}, currentFilter=${currentFilter})}" aria-label="Last">&gt;&gt;</a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

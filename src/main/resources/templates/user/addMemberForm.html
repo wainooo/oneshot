@@ -1,0 +1,124 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">회원가입</h2>
+                <div class="container p-2 d-flex justify-content-center">
+                    <div class="text-center">
+                        <p class="mx-2"><a th:href="@{/login}" class="text-decoration-none">로그인</a></p>
+                        <p>/</p>
+                        <p class="mx-2"><a th:href="@{/add}" class="text-decoration-none fw-bold">회원가입</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox p-3">
+            <div class="container mb-5">
+                <div class="container pt-5 col-sm-12 col-10 col-lg-7">
+                    <div class="bg-white p-4 rounded shadow">
+                        <div class="text-end text-danger mb-4">
+                            <small>* 표시는 필수 입력사항입니다.</small>
+                        </div>
+                        <form th:object="${memberForm}" method="POST">
+                            <div class="form-group row px-2">
+                                <label th:for="loginId" class="col-sm-4 col-form-label fw-bold"><span class="text-danger">*</span> 아이디</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{loginId}" type="text" class="form-control"
+                                           th:classappend="${#fields.hasErrors('loginId')} ? 'is-invalid' : ''">
+                                    <div th:if="${#fields.hasErrors('loginId')}" class="text-danger">
+                                        <span th:errors="*{loginId}">아이디 오류</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+                            <div class="form-group row px-2">
+                                <label th:for="password" class="col-sm-4 col-form-label fw-bold"><span class="text-danger">*</span> 비밀번호</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{password}" type="password" class="form-control"
+                                           th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''">
+                                    <div th:if="${#fields.hasErrors('password')}" class="text-danger">
+                                        <span th:errors="*{password}">비밀번호 오류</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+                            <div class="form-group row px-2">
+                                <label th:for="name" class="col-sm-4 col-form-label fw-bold"><span class="text-danger">*</span> 이름</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{name}" type="text" class="form-control"
+                                           th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                                    <div th:if="${#fields.hasErrors('name')}" class="text-danger">
+                                        <span th:errors="*{name}">이름 오류</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+                            <div class="form-group row px-2">
+                                <label th:for="birthdate" class="col-sm-4 col-form-label fw-bold"><span class="text-danger">*</span> 생년월일</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{birthdate}" type="date" class="form-control"
+                                           th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''">
+                                    <div th:if="${#fields.hasErrors('birthdate')}" class="text-danger">
+                                        <span th:errors="*{birthdate}">생년월일 오류</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+                            <div class="form-group row px-1 m-1">
+                                <label th:for="gender" class="col-sm-4 col-form-label fw-bold">  성별</label>
+                                <div class="col-sm-8 m-auto">
+                                    <div class="form-check form-check-inline">
+                                        <input th:field="*{gender}" class="form-check-input" type="radio" value="남성">
+                                        <label th:for="gender" class="form-check-label">남성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input th:field="*{gender}" class="form-check-input" type="radio" value="여성">
+                                        <label th:for="gender" class="form-check-label">여성</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+                            <div class="form-group row px-1 m-1">
+                                <label th:for="email" class="col-sm-4 col-form-label fw-bold">  이메일</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{email}" type="email" class="form-control" placeholder="abc123@naver.com">
+                                </div>
+                            </div>
+                            <div class="line_s border-top my-3"></div>
+
+                            <!-- 체크박스 추가 -->
+                            <div class="form-group row px-4">
+                                <div class="form-check">
+                                    <input th:field="*{emailOptIn}" id="emailOptIn" class="form-check-input" type="checkbox" value="true">
+                                    <label th:for="emailOptIn" class="form-check-label">(선택) 정보/이벤트 메일 수신에 동의합니다.</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ageConsent" name="ageConsent" required>
+                                    <label class="form-check-label text-danger" for="ageConsent">(필수) 만 19세 이상입니다.</label>
+                                </div>
+                            </div>
+
+                            <div class="row my-5">
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-evenly">
+                                        <button type="button" class="btn b1 btn-responsive" onclick="window.history.back();">취소</button>
+                                        <button type="submit" class="btn b2 btn-responsive">회원가입</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

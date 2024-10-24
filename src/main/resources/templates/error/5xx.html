@@ -1,0 +1,35 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!-- header 시작 -->
+    <header class="sub_haeder">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center text-white">
+                <h3>5xx 오류 페이지</h3>
+            </div>
+        </div>
+    </header>
+    <!-- header 끝 -->
+
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox p-5">
+            <div class="container mb-5">
+                <div class="container pt-5 col-sm-12 col-10 col-lg-7">
+                    <div class="bg-white p-5 rounded shadow">
+                        <div class="text-center mb-5">
+                            <h5>서버에 문제가 발생했습니다.</h5>
+                        </div>
+                        <div class="text-center my-5">
+                            <p>죄송합니다. 요청하신 페이지를 찾을 수 없습니다.</p>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/}'|">홈으로 돌아가기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

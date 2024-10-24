@@ -1,0 +1,55 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="sub_header">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center">
+            <div class="container p-2 text-center">
+                <h2 class="fs-1">My 게시글</h2>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox p-3">
+            <div class="container mb-5">
+                <div class="container pt-5 col-lg-7 col-md-8 col-sm-9">
+                    <div class="p-4">
+                        <div class="row justify-content-center mb-3 pt-2 pb-4">
+                            <div class="rounded-5 col-2 shadow" style="width:250px;height:50px;background-color:#6c5d53;" >
+                                <h4 class="py-2 text-center text-white align-middle">게시글 작성하기</h4>
+                            </div>
+                        </div>
+                        <form th:object="${questionForm}" method="post">
+                            <div class="row py-5">
+                                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger" role="alert">
+                                    <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="subject" class="form-label fw-bold">제목</label>
+                                    <input th:field="*{subject}" type="text" class="form-control" placeholder="제목을 입력하세요">
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="content" class="form-label fw-bold">내용</label>
+                                    <textarea th:field="*{content}" class="form-control cr"  placeholder="내용을 입력하세요."></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="me-2">
+                                        <a href="javascript:void(0)" onclick="window.history.back(); return false;">
+                                            <button class="btn btn-outline-secondary me-5" rows="15" type="button">취소</button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-dark" type="submit">등록</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>
